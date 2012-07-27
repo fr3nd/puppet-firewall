@@ -1,0 +1,10 @@
+
+# Start iptables_post
+
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT 
+-A INPUT -i lo -j ACCEPT 
+# Uncomment this line to enable logging:
+#-A INPUT -j LOG --log-level 4
+-A INPUT -j REJECT
+COMMIT
+

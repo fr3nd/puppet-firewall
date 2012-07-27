@@ -1,0 +1,21 @@
+<% if comment != "" -%>
+
+# <%= comment %><% end -%><%# if comment -%>
+<% if has_variable?("rule") %>
+<%= rule %>
+<% else -%>
+<% sources.each do |source| -%>
+<% interfaces.each do |interface| -%>
+<% protocols.each do |protocol| -%>
+<% if protocol == "icmp" %>
+-A INPUT -s <%= source %> -i <%= interface %> -p icmp -j <%= action -%>
+<% else -%>
+<% ports.each do |port| %>
+-A INPUT -s <%= source %> -i <%= interface %> -p <%= protocol %> -m <%= protocol %> --dport <%= port -%> -j <%= action -%>
+<% end -%><%# ports.each do |port| -%>
+<% end -%><%# if protocol icmp -%>
+<% end -%><%# protocols.each do |protocol| -%>
+<% end -%><%# interfaces.each do |interface| -%>
+<% end -%><%# sources.each do |source| -%>
+<% end -%><%# if has_variable?(rule) -%>
+
