@@ -16,18 +16,18 @@
 # }
 #
 define firewall::rule::ports (
-  $ensure = "present",
-  $order = "50",
-  $interfaces = "eth0",
-  $action = "ACCEPT",
-  $host_name = ""
+  $ensure = 'present',
+  $order = '50',
+  $interfaces = 'eth0',
+  $action = 'ACCEPT',
+  $host_name = ''
 ) {
 
-  $port = inline_template("<%= name.split('/')[0] %>")
-  $protocol = inline_template("<%= name.split('/')[1].split(':')[0] %>")
-  $sources_string = inline_template("<%= name.split(':')[1] %>")
-  $host = inline_template("<%= name.split(':')[2] %>")
-  $sources = split($sources_string, ",")
+  $port = inline_template('<%= name.split(\'/\')[0] %>')
+  $protocol = inline_template('<%= name.split(\'/\')[1].split(\':\')[0] %>')
+  $sources_string = inline_template('<%= name.split(\':\')[1] %>')
+  $host = inline_template('<%= name.split(\':\')[2] %>')
+  $sources = split($sources_string, ',')
 
   firewall::rule { "allow_${port}_${protocol}_from_${sources_string}_to_${host}":
     description => "allow_${port}_${protocol}_from_${host_name}_${sources_string}_to_${host}",

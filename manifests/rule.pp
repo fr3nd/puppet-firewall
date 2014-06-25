@@ -23,9 +23,9 @@
 #    }
 #
 define firewall::rule (
-  $ensure = "present",
-  $description = "",
-  $order = "50",
+  $ensure = 'present',
+  $description = '',
+  $order = '50',
   $comment = '',
   $sources = '',
   $interfaces = [ 'eth0' ],
@@ -34,17 +34,17 @@ define firewall::rule (
   $action = 'ACCEPT'
 ) {
 
-  if $description != "" {
+  if $description != '' {
     $file_name = $description
     } else {
       $file_name = $name
     }
 
     file { "/etc/sysconfig/iptables.d/${order}_${file_name}":
-      ensure => $ensure,
-      mode => 0600,
-      content => template("firewall/firewall_rule.erb"),
-      notify => Exec["rebuild_iptables"],
+      ensure  => $ensure,
+      mode    => '0600',
+      content => template('firewall/firewall_rule.erb'),
+      notify  => Exec['rebuild_iptables'],
     }
 
 }
