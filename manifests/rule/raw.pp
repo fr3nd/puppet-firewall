@@ -17,23 +17,23 @@
 #    }
 #
 define firewall::rule::raw (
-    $description = "",
-    $order = "50",
-    $comment = "",
-    $rule = ""
+  $description = "",
+  $order = "50",
+  $comment = "",
+  $rule = ""
 ){
 
-    if $description != "" {
-        $file_name = $description
+  if $description != "" {
+    $file_name = $description
     } else {
-        $file_name = $name
+      $file_name = $name
     }
 
     file { "/etc/sysconfig/iptables.d/${order}_${file_name}":
-        ensure => present,
-        mode => 600,
-        content => template("firewall/firewall_rule.erb"),
-        notify => Exec["rebuild_iptables"],
+      ensure => present,
+      mode => 600,
+      content => template("firewall/firewall_rule.erb"),
+      notify => Exec["rebuild_iptables"],
     }
 
 }
