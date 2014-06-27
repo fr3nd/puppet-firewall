@@ -2,7 +2,7 @@
 
 Basic firewall module to use with iptables
 
-To create a new firewall rule, use the firewall-rule definition:
+To create a new firewall rule, use the firewall::rule definition:
 
 ```
 include firewall
